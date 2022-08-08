@@ -15,6 +15,7 @@ RSpec.describe Item do
   end
 
   it 'should return a price for the item' do
+    # require 'pry';binding.pry
     expect(item2.price).to eq 0.5
   end
 
