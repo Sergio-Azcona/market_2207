@@ -15,9 +15,12 @@ class Vendor
 
   def potential_revenue
     inventory_value = 0
-      @inventory.each do |item|
-        # inventory.item.each do |item, quality|
-        # inventory_value[item].price * quantity
+      @inventory.each do |item, quantity|
+        inventory_value += item.price * quantity
+        
+        # require 'pry';binding.pry
+        # inventory_value[product.price] * amount
+        # require 'pry';binding.pry
         # end
       end
       inventory_value
