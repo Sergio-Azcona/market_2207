@@ -19,8 +19,17 @@ class Market
     end
   end
 
-  
-  # end
+  def sorted_item_list
+    list_of_items = []
+    @vendors.each do |vendor|
+      vendor.inventory.each do |item, quantity|
+        list_of_items[item] 
+        require'pry';binding.pry
+      end
+    end
+  list_of_items
+  end
+
 
 
 end
