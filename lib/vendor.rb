@@ -13,4 +13,14 @@ class Vendor
     @inventory[product]
   end
 
+  def potential_revenue
+    inventory_value = 0
+      @inventory.each do |item|
+        # inventory.item.each do |item, quality|
+        # inventory_value[item].price * quantity
+        # end
+      end
+      inventory_value
+    end
+
 end

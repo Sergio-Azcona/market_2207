@@ -1,5 +1,6 @@
 require './lib/item'
 require './lib/vendor'
+require './lib/market'
 
 RSpec.describe Vendor do
   let(:item1) { Item.new({name: 'Peach', price: "$0.75"}) }
@@ -31,6 +32,37 @@ RSpec.describe Vendor do
     vendor.stock(item1, -32)
     expect(vendor.check_stock(item1)).to eq 23
     expect(vendor.inventory).to eq ({item1 => 23, item2 => 12})
+  end
 
+  context 'testing for I3 final Q, potential revenue each vendor holds' do
+    let(:item1) { Item.new({name: 'Peach', price: "$0.75"}) }
+    let(:item2) { Item.new({name: 'Tomato', price: '$0.50'}) }
+    let(:item3) { Item.new({name: "Peach-Raspberry Nice Cream", price: "$5.30"}) }
+    let(:item4) { Item.new({name: "Banana Nice Cream", price: "$4.25"}) }
+    let(:vendor1) { Vendor.new("Rocky Mountain Fresh") }
+    let(:vendor2) { Vendor.new("Ba-Nom-a-Nom") }
+    let(:vendor3) { Vendor.new("Palisade Peach Shack") }
+    let(:market) { Market.new("South Pearl Street Farmers Market") }
+    let(:item1) { Item.new({name: 'Peach', price: "$0.75"}) }
+    let(:item2) { Item.new({name: 'Tomato', price: '$0.50'}) }
+    let(:item3) { Item.new({name: "Peach-Raspberry Nice Cream", price: "$5.30"}) }
+    let(:item4) { Item.new({name: "Banana Nice Cream", price: "$4.25"}) }
+
+    it'should calculate vendor potential revenue based on quantity and unit price'do
+        #sum of all their items' price * quantity
+        vendor1.stock(item1, 35)
+        vendor1.stock(item2, 7)
+        market.add_vendor(vendor1)
+        vendor2.stock(item2, 7)
+        vendor2.stock(item3, 25)
+        vendor2.stock(item4, 50)
+        market.add_vendor(vendor2)
+        vendor3.stock(item1, 65)
+        vendor3.stock(item2, 2)
+        market.add_vendor(vendor3)
+
+        require 'pry';binding.pry
+        expect(vendor1.potential_revenue).to eq 29.75
+    end
   end
 end
